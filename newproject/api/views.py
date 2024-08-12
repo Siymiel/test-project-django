@@ -7,8 +7,6 @@ from rest_framework import status # type: ignore
 from rest_framework.exceptions import NotFound # type: ignore
 from rest_framework.pagination import PageNumberPagination # type: ignore
 from django.db import transaction
-import datetime
-from pytz import timezone
 
 # Configure logging
 logger = logging.getLogger(__name__)
