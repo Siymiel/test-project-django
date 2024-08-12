@@ -7,9 +7,17 @@ from rest_framework import status # type: ignore
 from rest_framework.exceptions import NotFound # type: ignore
 from rest_framework.pagination import PageNumberPagination # type: ignore
 from django.db import transaction
+import datetime
+from pytz import timezone
 
 # Configure logging
 logger = logging.getLogger(__name__)
+
+# @api_view(['GET'])
+# def get_books(request):
+#     books = Book.objects.all()
+#     serialized_data = BookSerializer(books, many=True).data
+#     return Response(serialized_data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def get_books(request):
@@ -17,24 +25,24 @@ def get_books(request):
         # Get query parameters from the request
         title = request.query_params.get('title', None)
         author = request.query_params.get('author', None)
-        
+
         # Filter books based on query parameters (title or author)
         books = Book.objects.all()
-        if (title):
+        if title:
             books = books.filter(title__icontains=title)
-        if (author):
+        if author:
             books = books.filter(author__icontains=author)
-            
+
         # Implement pagination
         paginator = PageNumberPagination()
         paginator.page_size = 10
         paginated_books = paginator.paginate_queryset(books, request)
-        
+
         # Serialize the paginated data
         serialized_data = BookSerializer(paginated_books, many=True).data
 
         return paginator.get_paginated_response(serialized_data)
-        
+
     except Exception as e:
         logger.error(f"Error retrieving books: {e}")
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
