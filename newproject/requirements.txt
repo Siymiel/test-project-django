@@ -8,5 +8,7 @@ django-cors-headers==4.4.0
 coloredlogs==15.0.1
 # Postgres database adapter for python
 psycopg2-binary==2.9.9
-# oad environment variables from a .env file
+# Add environment variables from a .env file
 python-dotenv==1.0.1
+# Attach a timezone to the datetime object.
+pytz==2024.1
