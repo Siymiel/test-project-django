@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Book
-import datetime
-from pytz import timezone
+
 
 # Register your models here.
 class BookAdmin(admin.ModelAdmin):
