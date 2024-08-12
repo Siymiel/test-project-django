@@ -1,4 +1,4 @@
-#### setting up the virtual environment
+#### Setting up the virtual environment
 
 ```bash
 python -m venv venv
